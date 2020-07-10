@@ -10,3 +10,18 @@
 6) Array are call by value 
 7) If the first letter of var is CAPITAL the varaible will be exposed at global level
 8) If the slice you want to append to is very big then what we can do is use the make func to create a slice with the cap we want and then append to it
+9) To use validation for fields in structs in go we can use tags and reflect package to get those tags eg
+```golang
+
+type Employee struct {
+	address string `required max:"100"`
+	name    string
+	age     int
+}
+
+func main() {
+	t := reflect.TypeOf(Employee{})
+	field, i := t.FieldByName("address")
+	fmt.Println(field.Tag, i) //required max:"100" true
+}
+```
