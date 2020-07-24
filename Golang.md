@@ -25,3 +25,4 @@ func main() {
 	fmt.Println(field.Tag, i) //required max:"100" true
 }
 ```
+10) In golang when you assign a struct to a variabke and then you change the newly created structs properties it will not affect the old struct properties
