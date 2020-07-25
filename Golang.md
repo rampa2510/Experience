@@ -26,3 +26,59 @@ func main() {
 }
 ```
 10) In golang when you assign a struct to a variabke and then you change the newly created structs properties it will not affect the old struct properties
+11) Go uses composition rather than inheritance. It works on embedding. Example -
+```golang
+type animal struct {
+	species   string
+	ageOfSpan int
+}
+
+type bird struct {
+	animal
+	name string
+}
+
+func main() {
+	b := bird{}
+	b.species = "lol"
+	b.ageOfSpan = 18
+	b.name = "ram"
+	fmt.Println(b.species) // {{lol 18} ram}
+}
+
+```
+12) In golang the switch statements dont have fallthrough condition so if one case is true without explicit mentioning break go will break from the switch statements but if we want a fallthrough condition we can code the ```fallthrough``` keyword in the case statement
+13) We can use label in golang - if we have a nested for loop and we want to break from both the for loops we can use label
+```golang
+func main() {
+Loop:
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			if j > 1 {
+				break Loop
+			}
+		}
+		fmt.Println("ll")
+	}
+}
+```
+This will never print ll as it will never reach that blog
+14) One of the main use of defer is to code the creation and end of a resource together so that we do not forget to close the resource example
+```golang
+
+func main() {
+	res, err := http.Get("https://www.lipsum.com/")
+	defer res.Body.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+	robots, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(robots))
+
+}
+
+```
+as we can see here we are creating the res variable and closing it but due to the functionalities of defer the res variable will be erased after main
