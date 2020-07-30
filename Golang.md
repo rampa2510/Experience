@@ -82,3 +82,60 @@ func main() {
 
 ```
 as we can see here we are creating the res variable and closing it but due to the functionalities of defer the res variable will be erased after main
+15) Panic function is called after defer statements 
+16) Go uses panic and recover method instead of try catch blocks 
+17) In go when we intialise pointers it is assigned to nil and if we want to access the underlying values we can do it without the explict syntax eg
+```golang
+type myStruct struct{
+	value int
+}
+
+func main(){
+	var a *myStruct
+	a = new(myStruct) // a = myStruct{value:1}
+	a.value // instead of (*a).value
+}
+```
+18) We can use variadic function sif we dont know how many values will be passed eg
+```golang
+func add(nums ...int){ // variadic ffn declaration
+	result := 0
+	for _,i in range nums{
+		result += i
+	}
+}
+func main(){
+	add(1,2,3,4)
+}
+```
+SO as we can see here the add fn doesnt know how many parameters will be passed but due to the variadic declartaion it will add it to the nums slices.
+19) We can use named return values eg
+```golang
+func add(nums ...int) (result int) { // variadic ffn declaration
+	result := 0
+	for _,i in range nums{
+		result += i
+	}
+	return // this will automatically return result variable
+}
+func main(){
+	add(1,2,3,4)
+}
+```
+20) We can use methods to add custom functions to struct
+```golang
+type greetDetails struct{
+	name string
+}
+func (g greetDetails) greet(){ // greet will be the name of the method assigned
+	fmt.Println("Hello " +g.name)
+}
+func main(){
+	g := greetDetails{name:"ram"}
+	g.greet() // Hello ram
+}
+```
+21) If you want to declare a map that in the global scope the ypu can do this
+```go
+var priorityTable = map[string]int{"+": 1, "-": 1, "*": 2, "/": 2, "^": 3}
+```
